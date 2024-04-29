@@ -7,9 +7,9 @@ import pickle
 import random
 
 # Loading in Frame 1 as base for star detection
-base = plt.imread(os.path.join("images","aligned_project night 2_00124.png"))
+base = plt.imread(os.path.join("images","aligned_project night 2_00001.png"))
         
-base = convapool(base,8)
+base = convapool(base,20)
 
 plt.imshow(base, cmap="gray")
 plt.show()
@@ -19,7 +19,7 @@ plt.show()
 stars = []
 for row in range(len(base)):
     for chunk in range(len(base[row])):
-        if base[row][chunk] > 0.24:
+        if base[row][chunk] > 0.18:
             stars.append((row,chunk))
 
 print(len(stars))
@@ -36,7 +36,7 @@ for num in range(10):
 for image in range(1,286):
     try:
         frame = plt.imread(os.path.join("images","aligned_project night 2_" + str(image).zfill(5) + ".png"))
-        frame = convapool(frame, 8)
+        frame = convapool(frame, 20)
     except:
         pass
     
