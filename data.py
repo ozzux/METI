@@ -7,7 +7,7 @@ import pickle
 import random
 
 # Loading in Frame 1 as base for star detection
-base = plt.imread(os.path.join("images","aligned_project night 2_00001.png"))
+base = plt.imread(os.path.join("images","aligned_project night 2_00127.png"))
         
 base = convapool(base,20)
 
@@ -15,14 +15,9 @@ plt.imshow(base, cmap="gray")
 plt.show()
 
 
-# Identifying Stars
-stars = []
-for row in range(len(base)):
-    for chunk in range(len(base[row])):
-        if base[row][chunk] > 0.18:
-            stars.append((row,chunk))
-
-print(len(stars))
+pickle_in = open("stars.pickle", "rb")
+stars = pickle.load(pickle_in)
+pickle_in.close()
 
 # Collecting Light Data on Each Star
 star_light = []
@@ -39,22 +34,16 @@ for image in range(1,286):
         frame = convapool(frame, 20)
     except:
         pass
-    
-    i = 0
+
     avg = 0
+    for i in range(10):
+        num = random.randint(0,len(stars)-1)
+        avg += frame[stars[num][1]][stars[num][0]]
 
-    for row in frame:
-        for chunk in row:
-            if chunk == 0:
-                pass
-            else:
-                i = i + 1
-                avg = avg + chunk
-
-    avg = avg/i
+    avg = avg/10
 
     for star in range(len(stars)):
-        star_light[star].append((frame[stars[star][0]][stars[star][1]])/avg)
+        star_light[star].append((frame[stars[star][1]][stars[star][0]])/avg)
 
 pickle_out = open("star_light.pickle","wb")
 pickle.dump(star_light,pickle_out)
@@ -63,5 +52,5 @@ pickle_out.close()
 # Printing sky
 plt.figure(1)
 plt.imshow(base, cmap="gray")
-print(base[stars[2][0]][stars[2][1]])
+print(base[stars[2][1]][stars[2][0]])
 plt.show()
