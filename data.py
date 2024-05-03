@@ -28,6 +28,8 @@ rand_stars = []
 for num in range(10):
     rand_stars.append(random.randint(0,len(stars)))
 
+rand_nums = [123,654,234,765,34,65,2,34,94,17]
+
 for image in range(1,286):
     try:
         frame = plt.imread(os.path.join("images","aligned_project night 2_" + str(image).zfill(5) + ".png"))
@@ -37,7 +39,7 @@ for image in range(1,286):
 
     avg = 0
     for i in range(10):
-        num = random.randint(0,len(stars)-1)
+        num = rand_nums[i]
         avg += frame[stars[num][1]][stars[num][0]]
 
     avg = avg/10

@@ -6,6 +6,7 @@ star_light = pickle.load(pickle_in)
 pickle_in.close()
 
 for star in range(len(star_light)):
+    plt.ylim(0,3)
     plt.plot(star_light[star])
     plt.title(str(star))
     plt.show()

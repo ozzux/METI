@@ -23,3 +23,5 @@ pickle_out.close()
 print(len(stars))
 
 print(stars)
+
+print(stars[43])
