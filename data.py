@@ -28,7 +28,10 @@ rand_stars = []
 for num in range(10):
     rand_stars.append(random.randint(0,len(stars)))
 
-rand_nums = [123,654,234,765,34,65,2,34,94,17]
+rand_nums = []
+
+for i in range(10):
+    rand_nums.append(random.randint(0,len(stars)-1))
 
 for image in range(1,286):
     try:
